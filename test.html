@@ -1,5 +1,10 @@
 <html>
 <script>
+document.cookie = "word=hello";
+var cookievalue = document.cookie;
+function cookie(){
+	document.getElementById("body").innerHTML = cookievalue;
+}
 var list = ["一", "右", "雨", "円", "王", "音", "下", "火", "花", "貝"
 , "学", "気", "九", "休", "玉", "金", "空", "月", "犬", "見", "五"
 , "口", "校", "左", "三", "山", "子", "四", "糸", "字", "耳", "七"
@@ -70,7 +75,7 @@ function randomKanji ()
 	}
 	</style>
 </head>
-<body onload="randomKanji()">
+<body onload="randomKanji()" onclick="cookie()">
 <br/>
 <table width="100%">
 	<tr>
@@ -82,8 +87,8 @@ function randomKanji ()
 <hr/>
 <table width="30%" class="menu" >
 	<tr>
-		<td width="15%" class="menuitem" align="center"><font size="5" onclick="location.href = 'one.html';">Learn</font></td>
-		<td width="15%" class="menuitem" align="center"><font size="5" onclick="location.href = 'list.html';">List</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'one.html';"><font size="5">Learn</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'list.html';"><font size="5">List</font></td>
 	</tr>
 </table>
 <div style="font-size:100" id="kanjiId" class="kanji"></div>
