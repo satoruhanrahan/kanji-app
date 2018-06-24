@@ -1,10 +1,10 @@
 <html>
+<?php
+$cookie_name = "user";
+$cookie_value = "John Doe";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
 <script>
-document.cookie = "word=hello";
-var cookievalue = document.cookie;
-function cookie(){
-	document.getElementById("body").innerHTML = document.cookie;
-}
 var list = ["一", "右", "雨", "円", "王", "音", "下", "火", "花", "貝"
 , "学", "気", "九", "休", "玉", "金", "空", "月", "犬", "見", "五"
 , "口", "校", "左", "三", "山", "子", "四", "糸", "字", "耳", "七"
@@ -18,6 +18,11 @@ function randomKanji ()
 {
 	var number = Math.floor(Math.random() * 80);
 	document.getElementById("kanjiId").innerHTML = list[number];
+}
+
+function cookie(){
+	var cookie = document.cookie;
+	document.getElementById("english").innerHTML = cookie;
 }
 </script>
 <head>
@@ -115,7 +120,7 @@ function randomKanji ()
 		<td align= "left"><input type="text" id="onyomi"></td>
 	</tr>	
 </table>
-<input type="submit" value="Check" class="check">
+<input type="submit" value="Check" class="check" onclick="cookie()">
 <div class="next" onclick="randomKanji()">
 	<b>Next >></b>
 </div>
