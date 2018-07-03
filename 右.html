@@ -1,0 +1,103 @@
+<html>
+<script>
+window.onload = function() {
+	var learnedKanji = JSON.parse(localStorage.getItem("learnedKanji"));
+	if(learnedKanji == null){
+		var learnedKanji = ["右"];
+		localStorage.setItem("learnedKanji", JSON.stringify(learnedKanji));
+	}
+	else{
+		if(!learnedKanji.includes("右")){
+			learnedKanji.push("右");
+			localStorage.setItem("learnedKanji", JSON.stringify(learnedKanji));
+		}	
+	}
+}
+</script>
+<head>
+	<title>Right</title>
+	<style>
+	.readings{
+		position: relative;
+		top: -37%;
+		left: 20%;
+		font-size: 25;
+	}
+	.information{
+		position: relative;
+		top: -25%;
+		left: 0%;
+		font-size: 25;
+	}
+	.next{
+		position: relative;
+		top: -60%;
+		left: 80%;
+		width: 10%;
+		height: 5%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #F99647;
+		border-style: solid;
+		border-width: 3px;
+		border-color: gray;
+		font-size: 25;
+	}
+	.menu{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+		border-collapse: collapse;
+	}
+	.menuitem{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+	}
+	</style>
+</head>
+<body>
+<br/>
+<table width="100%">
+	<tr>
+		<td align="center">
+			<h1>Learn Kanji</h1>
+		</td>
+	</tr>
+</table>
+<hr/>
+<table width="30%" class="menu" >
+	<tr>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'test.html';"><font size="5">Test</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'list.html';"><font size="5">List</font></td>
+	</tr>
+</table>
+<div style="font-size:200">右</div>
+<table class="readings">
+	<tr>
+		<td>English:</td>
+		<td>Right</td>
+	<tr/>
+	<tr>
+		<td>Kunyomi:</td>
+		<td>みぎ, migi</td>
+	<tr>
+		<td>Onyomi:</td>
+		<td>ウ, ユウ, u, yuu</td>
+	</tr>	
+</table>
+<div class="next" onclick="location.href='雨.html';">
+	<b>Next >></b>
+</div>
+<table class="information">
+	<tr>
+		<td>How to Remember: </td>
+		<td>A man with a big mouth pointed to the right and said "You go right" (yuu, u).</td>
+	<tr/>
+	<tr>
+		<td><br/><a target="_blank" href="https://en.wiktionary.org/wiki/%E5%8F%B3" style="color:black">Link to Wiktionary</a></td>
+	</tr>	
+</table>
+</body>	
+</html>

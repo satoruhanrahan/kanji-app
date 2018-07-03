@@ -1,28 +1,226 @@
 <html>
-<?php
-$cookie_name = "user";
-$cookie_value = "John Doe";
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-?>
 <script>
-var list = ["一", "右", "雨", "円", "王", "音", "下", "火", "花", "貝"
-, "学", "気", "九", "休", "玉", "金", "空", "月", "犬", "見", "五"
-, "口", "校", "左", "三", "山", "子", "四", "糸", "字", "耳", "七"
-, "車", "手", "十", "出", "女", "小", "上", "森", "人", "水", "正"
-, "生", "青", "夕", "石", "赤", "千", "川", "先", "早", "草", "足"
-, "村", "大", "男", "竹", "中", "虫", "町", "天", "田", "土", "二"
-, "日", "入", "年", "白", "八", "百", "文", "木", "本", "名", "目"
-, "立", "力", "林", "六"];
- 
+var learnedKanji = JSON.parse(localStorage.getItem("learnedKanji"));
+if(learnedKanji == null)
+	alert("You haven't learnt any kanji to test!");
+var completedKanji = JSON.parse(localStorage.getItem("completedKanji"));
+if(completedKanji == null)
+	completedKanji = [];
 function randomKanji ()
-{
-	var number = Math.floor(Math.random() * 80);
-	document.getElementById("kanjiId").innerHTML = list[number];
+{	
+	var stillKanjiToTest = false;
+	for(var i = 0; i < learnedKanji.length; i++){
+		if(!completedKanji.includes(learnedKanji[i]))
+			var stillKanjiToTest = true;
+	}	
+	if(!stillKanjiToTest)
+		completedKanji = [];
+	var number = Math.floor(Math.random() * learnedKanji.length);
+	while(completedKanji.includes(learnedKanji[number])){
+		number = Math.floor(Math.random() * learnedKanji.length);
+	}
+	document.getElementById("kanji").innerHTML = learnedKanji[number];
+	document.getElementById("englishResult").innerHTML = "";
+	document.getElementById("kunyomiResult").innerHTML = "";
+	document.getElementById("onyomiResult").innerHTML = "";
+	document.getElementById("english").value = "";
+	document.getElementById("kunyomi").value = "";
+	document.getElementById("onyomi").value = "";
 }
 
-function cookie(){
-	var cookie = document.cookie;
-	document.getElementById("english").innerHTML = cookie;
+function check (){
+	var inputEnglish = document.getElementById("english").value.toLowerCase().trim();
+	var inputKunyomi = document.getElementById("kunyomi").value.toLowerCase().trim();
+	var inputOnyomi = document.getElementById("onyomi").value.toLowerCase().trim();
+	var englishCorrect = false;
+	var kunyomiCorrect = false;
+	var onyomiCorrect = false;
+	
+	if(document.getElementById("kanji").innerHTML == "一"){
+		if(inputEnglish == "one"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘one</font>";
+		if(inputKunyomi == "hito" || inputKunyomi == "hitotsu" || inputKunyomi == "hito, hitotsu" || inputKunyomi == "hitotsu, hito" || inputKunyomi == "ひと" || inputKunyomi == "ひとつ" || inputKunyomi == "ひと, ひとつ" || inputKunyomi == "ひとつ, ひと" ){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">✘hito, hitotsu, ひと, ひとつ</font>";
+		if(inputOnyomi == "ichi" || inputOnyomi == "いち" || inputOnyomi == "イチ"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘ichi, イチ, いち</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("一");
+	}
+	if(document.getElementById("kanji").innerHTML == "口"){
+		if(inputEnglish == "mouth"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘mouth</font>";
+		if(inputKunyomi == "kuchi" || inputKunyomi == "くち"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">✘kuchi, くち</font>";
+		if(inputOnyomi == "kou" || inputOnyomi == "ku" || inputOnyomi == "ku, kou" || inputOnyomi == "kou, ku" || inputOnyomi == "コウ" || inputOnyomi == "ク" || inputOnyomi == "コウ, ク" || inputOnyomi == "ク, コウ" ){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘kou, ku, コウ, ク</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("口");
+	}
+	if(document.getElementById("kanji").innerHTML == "右"){
+		if(inputEnglish == "right"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘one</font>";
+		if(inputKunyomi == "migi" || inputKunyomi == "みぎ"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">✘migi, みぎ</font>";
+		if(inputOnyomi == "u" || inputOnyomi == "yuu" || inputOnyomi == "u, yuu" || inputOnyomi == "yuu, u" || inputOnyomi == "ユウ" || inputOnyomi == "ウ" || inputOnyomi == "ユウ, ウ" || inputOnyomi == "ウ, ユウ" ){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘u, yuu, ユウ, ウ</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("右");
+	}
+	if(document.getElementById("kanji").innerHTML == "雨"){
+		if(inputEnglish == "rain"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘rain</font>";
+		if(inputKunyomi == "ame" || inputKunyomi == "あめ"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">ame, あめ</font>";
+		if(inputOnyomi == "u" || inputOnyomi == "ウ"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘u, ウ</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("雨");
+	}
+	if(document.getElementById("kanji").innerHTML == "七"){
+		if(inputEnglish == "seven"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘seven</font>";
+		if(inputKunyomi == "nana" || inputKunyomi == "nanatsu" || inputKunyomi == "なな" || inputKunyomi == "ななつ"|| inputKunyomi == "nana, nanatsu" || inputKunyomi == "nanatsu, nana" || inputKunyomi == "ななつ"|| inputKunyomi == "nanatsu" || inputKunyomi == "なな、　ななつ" || inputKunyomi == "ななつ、　なな"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">なな, ななつ, nana, nanatsu</font>";
+		if(inputOnyomi == "shichi" || inputOnyomi == "シチ" || inputOnyomi == "しち"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘shichi, シチ</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("七");
+	}
+	if(document.getElementById("kanji").innerHTML == "万"){
+		if(inputEnglish == "ten thousand"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘ten thousand</font>";
+		if(inputKunyomi == "yorozu" || inputKunyomi == "よろず"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">よろず, yorozu</font>";
+		if(inputOnyomi == "man" || inputOnyomi == "まん" || inputOnyomi == "ばん" || inputOnyomi == "ban" || inputOnyomi == "man, ban" || inputOnyomi == "ban, man"|| inputOnyomi == "ばん、まん"|| inputOnyomi == "まん、ばん"|| inputOnyomi == "バン、マン"|| inputOnyomi == "マン、バン"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">✘マン, バン, man, ban</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("万");
+	}
+	if(document.getElementById("kanji").innerHTML == "三"){
+		if(inputEnglish == "three"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘three</font>";
+		if(inputKunyomi == "みっつ" || inputKunyomi == "mittsu"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">みっつ, mittsu</font>";
+		if(inputOnyomi == "san" || inputOnyomi == "サン" || inputOnyomi == "さん"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">サン, san</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("三");
+	}
+	if(document.getElementById("kanji").innerHTML == "上"){
+		if(inputEnglish == "up" || inputEnglish == "above" || inputEnglish == "up, above" || inputEnglish == "above, up"){
+			document.getElementById("englishResult").innerHTML = "<font color=\"green\">✔</font>";
+			englishCorrect = true;
+		}
+		else
+			document.getElementById("englishResult").innerHTML = "<font color=\"red\">✘up, above</font>";
+		if(inputKunyomi == "うえ" || inputKunyomi == "ue"){
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			kunyomiCorrect = true;
+		}
+		else
+			document.getElementById("kunyomiResult").innerHTML = "<font color=\"red\">うえ, mue</font>";
+		if(inputOnyomi == "jou" || inputOnyomi == "ジョウ" || inputOnyomi == "じょう"){
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"green\">✔</font>";
+			onyomiCorrect = true;
+		}
+		else
+			document.getElementById("onyomiResult").innerHTML = "<font color=\"red\">ジョウ, jou</font>";
+		if(englishCorrect && kunyomiCorrect && onyomiCorrect)
+			addToCompleted("上");
+	}
+}
+function addToCompleted(kanji){
+	completedKanji = JSON.parse(localStorage.getItem("completedKanji"));
+	if(completedKanji == null)
+		completedKanji = [];
+	if(!completedKanji.includes(kanji)){
+		completedKanji.push(kanji);
+		localStorage.setItem("completedKanji", JSON.stringify(completedKanji));
+	}
 }
 </script>
 <head>
@@ -80,28 +278,29 @@ function cookie(){
 	}
 	</style>
 </head>
-<body onload="randomKanji()" onclick="cookie()" id="body">
+<body onload="randomKanji()">
 <br/>
 <table width="100%">
 	<tr>
 		<td align="center">
-			<h1>Grade One Kanji</h1>
+			<h1>Learn Kanji</h1>
 		</td>
 	</tr>
 </table>
 <hr/>
 <table width="30%" class="menu" >
 	<tr>
-		<td width="15%" class="menuitem" align="center" onclick="location.href = 'one.html';"><font size="5">Learn</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = '一.html';"><font size="5">Learn</font></td>
 		<td width="15%" class="menuitem" align="center" onclick="location.href = 'list.html';"><font size="5">List</font></td>
 	</tr>
 </table>
-<div style="font-size:100" id="kanjiId" class="kanji"></div>
+<div style="font-size:100" id="kanji" class="kanji"></div>
 <br/>
 <table class="answers">
 	<tr>
 		<td align= "right">English:</td>
 		<td align= "left"><input type="text" id="english"></td>
+		<td align= "left" id="englishResult"></td>
 	<tr/>
 	<tr>
 	<tr/>
@@ -110,6 +309,7 @@ function cookie(){
 	<tr>
 		<td align= "right">Kunyomi:</td>
 		<td align= "left"><input type="text" id="kunyomi"></td>
+		<td align= "left" id="kunyomiResult"></td>
 	</tr>
 	<tr>
 	<tr/>
@@ -118,9 +318,10 @@ function cookie(){
 	<tr>
 		<td align= "right">Onyomi:</td>
 		<td align= "left"><input type="text" id="onyomi"></td>
+		<td align= "left" id="onyomiResult"></td>
 	</tr>	
 </table>
-<input type="submit" value="Check" class="check" onclick="cookie()">
+<input type="submit" value="Check" class="check" onclick="check()">
 <div class="next" onclick="randomKanji()">
 	<b>Next >></b>
 </div>

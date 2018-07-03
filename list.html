@@ -1,117 +1,56 @@
 <html>
 <head>
-	<title>Grade One Kanji</title>
-</head>
-<body>
-	<h1>Grade One Kanji</h1>
-
-	<table>
-		<tr>
-			<td><a href="一.html">一</a></td>
-			<td><a href="右.html">右</a></td>
-			<td><a>雨</a></td>
-			<td><a>円</a></td>
-			<td><a>王</a></td>
-			<td><a>音</a></td>
-			<td><a>下</a></td>
-			<td><a>火</a></td>
-			<td><a>花</a></td>
-			<td><a>貝</a></td>
-		</tr>
-		<tr>
-			<td><a>学</a></td>
-			<td><a>気</a></td>
-			<td><a>九</a></td>
-			<td><a>休</a></td>
-			<td><a>玉</a></td>
-			<td><a>金</a></td>
-			<td><a>空</a></td>
-			<td><a>月</a></td>
-			<td><a>犬</a></td>
-			<td><a>見</a></td>
-		</tr>
-		<tr>
-			<td><a>五</a></td>
-			<td><a>口</a></td>
-			<td><a>校</a></td>
-			<td><a>左</a></td>
-			<td><a>三</a></td>
-			<td><a>山</a></td>
-			<td><a>子</a></td>
-			<td><a>四</a></td>
-			<td><a>糸</a></td>
-			<td><a>字</a></td>
-		</tr>
-		<tr>
-			<td><a>耳</a></td>
-			<td><a>七</a></td>
-			<td><a>車</a></td>
-			<td><a>手</a></td>
-			<td><a>十</a></td>
-			<td><a>出</a></td>
-			<td><a>女</a></td>
-			<td><a>小</a></td>
-			<td><a>上</a></td>
-			<td><a>森</a></td>
-		</tr>
-		<tr>
-			<td><a>人</a></td>
-			<td><a>水</a></td>
-			<td><a>正</a></td>
-			<td><a>生</a></td>
-			<td><a>青</a></td>
-			<td><a>夕</a></td>
-			<td><a>石</a></td>
-			<td><a>赤</a></td>
-			<td><a>千</a></td>
-			<td><a>川</a></td>
-		</tr>
-		<tr>
-			<td><a>先</a></td>
-			<td><a>早</a></td>
-			<td><a>草</a></td>
-			<td><a>足</a></td>
-			<td><a>村</a></td>
-			<td><a>大</a></td>
-			<td><a>男</a></td>
-			<td><a>竹</a></td>
-			<td><a>中</a></td>
-			<td><a>虫</a></td>
-		</tr>
-		<tr>
-			<td><a>町</a></td>
-			<td><a>天</a></td>
-			<td><a>田</a></td>
-			<td><a>土</a></td>
-			<td><a>二</a></td>
-			<td><a>日</a></td>
-			<td><a>入</a></td>
-			<td><a>年</a></td>
-			<td><a>白</a></td>
-			<td><a>八</a></td>
-		</tr>
-		<tr>
-			<td><a>百</a></td>
-			<td><a>文</a></td>
-			<td><a>木</a></td>
-			<td><a>本</a></td>
-			<td><a>名</a></td>
-			<td><a>目</a></td>
-			<td><a>立</a></td>
-			<td><a>力</a></td>
-			<td><a>林</a></td>
-			<td><a>六</a></td>
-		</tr>
-	</table>		
-</body>	
-</html>
+<title>List</title>
 <style>
-	td{
-		width:80;
-		font-size: 50;
-	}
 	a{
 		text-decoration: none;
 		color: black;
 	}
+	.menu{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+		border-collapse: collapse;
+	}
+	.menuitem{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+	}
+	.kanji:hover{
+		background-color:lightgray;
+	}
 </style>
+<script>
+var completedKanji = JSON.parse(localStorage.getItem("completedKanji"));
+if(completedKanji == null)
+	completedKanji = [];
+
+window.onload = function() {
+	completedKanji.forEach(function(kanji){
+		document.getElementById("list").innerHTML += "<td onclick=\"window.location.href = '" + kanji + ".html';\" class = \"kanji\">" + kanji + "</td>";
+	});
+}
+</script>
+</head>
+<body>
+<br/>
+<table width="100%">
+	<tr>
+		<td align="center">
+			<h1>Learn Kanji</h1>
+		</td>
+	</tr>
+</table>
+<hr/>	
+<table width="30%" class="menu" >
+	<tr>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = '一.html';"><font size="5">Learn</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'test.html';"><font size="5">Test</font></td>
+	</tr>
+</table>
+</br>
+<h2>Completed Kanji:</h2>
+<table  style="font-size:65"><tr id="list"></tr></table>
+</body>	
+</html>

@@ -1,0 +1,103 @@
+<html>
+<script>
+window.onload = function() {
+	var learnedKanji = JSON.parse(localStorage.getItem("learnedKanji"));
+	if(learnedKanji == null){
+		var learnedKanji = ["一"];
+		localStorage.setItem("learnedKanji", JSON.stringify(learnedKanji));
+	}
+	else{
+		if(!learnedKanji.includes("一")){
+			learnedKanji.push("一");
+			localStorage.setItem("learnedKanji", JSON.stringify(learnedKanji));
+		}	
+	}
+}
+</script>
+<head>
+	<title>One</title>
+	<style>
+	.readings{
+		position: relative;
+		top: -37%;
+		left: 20%;
+		font-size: 25;
+	}
+	.information{
+		position: relative;
+		top: -25%;
+		left: 0%;
+		font-size: 25;
+	}
+	.next{
+		position: relative;
+		top: -60%;
+		left: 80%;
+		width: 10%;
+		height: 5%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #F99647;
+		border-style: solid;
+		border-width: 3px;
+		border-color: gray;
+		font-size: 25;
+	}
+	.menu{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+		border-collapse: collapse;
+	}
+	.menuitem{
+		background-color: #F99647;
+		border-color: gray;
+		border: 2px solid gray;
+	}
+	</style>
+</head>
+<body>
+<br/>
+<table width="100%">
+	<tr>
+		<td align="center">
+			<h1>Learn Kanji</h1>
+		</td>
+	</tr>
+</table>
+<hr/>
+<table width="30%" class="menu" >
+	<tr>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'test.html';"><font size="5">Test</font></td>
+		<td width="15%" class="menuitem" align="center" onclick="location.href = 'list.html';"><font size="5">List</font></td>
+	</tr>
+</table>
+<div style="font-size:200">一</div>
+<table class="readings">
+	<tr>
+		<td>English: </td>
+		<td>One </td>
+	<tr/>
+	<tr>
+		<td>Kunyomi: </td>
+		<td>ひと、ひとつ, hito, hitotsu</td>
+	<tr>
+		<td>Onyomi:　</td>
+		<td>イチ, ichi</td>
+	</tr>	
+</table>
+<div class="next" onclick="location.href='口.html';">
+	<b>Next >></b>
+</div>
+<table class="information">
+	<tr>
+		<td>How to Remember: </td>
+		<td>One of my fingers is itchy (ichi)</td>
+	<tr/>
+	<tr>
+		<td><br/><a target="_blank" href="https://en.wiktionary.org/wiki/%E4%B8%80" style="color:black">Link to Wiktionary</a></td>
+	</tr>	
+</table>
+</body>	
+</html>
